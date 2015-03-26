@@ -250,7 +250,10 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
     	g.setFont(screenStr.getFont());
 		g.drawString(screenStr.getStr(),screenStr.getX(), screenStr.getY());
     }
-    public void run() {
+    /**
+     * グローバル変数の初期化
+     */
+    public void syokika(){
     	speed=SPEED_LOW;
     	loopJudge=true;
     	opLoopJudge=true;
@@ -265,16 +268,15 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
     	stock=99;
     	stockAreaX=width/4*5;
     	stockAreaY=height/4*2-BLOCK;
-//    	gameOverJudge=0;
     	gameOverLoop=true;
     	patternNextNext=BLOCKKINDS[(int)(Math.random()*BLOCKKINDS.length)];
     	patternNext=BLOCKKINDS[(int)(Math.random()*BLOCKKINDS.length)];
     	pattern=BLOCKKINDS[(int)(Math.random()*BLOCKKINDS.length)];
     	restartFlag=false;
-//    	fileCre=false;
-    	//fileSyokika();
-//    	masuSyokika();
+    }
+    public void run() {
 		while (game) {
+			syokika();
 			System.out.println("①マスの初期化を行います");
 	    	//マスの初期化
 	    	for(int i=0;i<subWidth;i++){
