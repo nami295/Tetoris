@@ -183,12 +183,16 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 			//テトリス画面、ゲームオーバー画面（ストックエリア）
 			patternArea(g,"stock",stockAreaX,stockAreaY);
         	if(stock!=99){
+        		System.out.print("paint  stock!=99[");
         		writeBlock(g,stock,stockAreaX,stockAreaY);
+        		System.out.println("]");
         		writeLine(g,stockAreaX,stockAreaY);
         	}
 			//テトリス画面、ゲームオーバー画面（ネクストエリア）
         	patternArea(g,"next",nextAreaX,nextAreaY);
+    		System.out.print("paint  ネクストエリア[");
         	writeBlock(g,patternNext,nextAreaX,nextAreaY);
+    		System.out.println("]");
         	writeLine(g,nextAreaX,nextAreaY);
 	    	//ゲームオーバー画面（ゲームオーバーアニメーション）
 	    	if(end && !gameOver){
@@ -220,8 +224,10 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 		    			}
 		    		}
 		    	}
+	    		System.out.print("paint  たまったブロックの色設定[");
 		    	//テトリス画面（ブロック表示）
 		        writeBlock(g,pattern,x,y);
+	    		System.out.println("]");
 		        //テトリス画面（罫線表示）
 		        g.setColor(Color.white);
 		        for(int i=0;i<subWidth+1;i++){
@@ -277,7 +283,7 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
     public void run() {
 		while (game) {
 			syokika();
-			System.out.println("①マスの初期化を行います");
+//			System.out.println("①マスの初期化を行います");
 	    	//マスの初期化
 	    	for(int i=0;i<subWidth;i++){
 	    		for(int j=0;j<subHeight;j++){
@@ -293,9 +299,9 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 	    			}
 	    		}
 	    	}
-			System.out.println("①マスの初期化が終了しました");
+//			System.out.println("①マスの初期化が終了しました");
 
-			System.out.println("②" + (opLoopJudge?"トップ画面のループに入ります":"トップ画面のループをスキップします"));
+//			System.out.println("②" + (opLoopJudge?"トップ画面のループに入ります":"トップ画面のループをスキップします"));
 			while (opLoopJudge) {	//opループ
 		    	try {
 		    		Thread.sleep(speed);
@@ -305,8 +311,8 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 		    	repaint();
 				plessEnter += 1;
 			}
-			System.out.println("②トップ画面のループが終了しました");
-			System.out.println("③" + (loopJudge?"テトリスのループに入ります":"テトリスのループをスキップします"));
+//			System.out.println("②トップ画面のループが終了しました");
+//			System.out.println("③" + (loopJudge?"テトリスのループに入ります":"テトリスのループをスキップします"));
 			//テトリスループ処理
 			while (loopJudge) {
 		    	try {
@@ -323,7 +329,7 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 				y += BLOCK;
 				gameOver();
 			}
-			System.out.println("③テトリスのループが終了しました");
+//			System.out.println("③テトリスのループが終了しました");
 			//ゲームオーバー画面描画
 			repaint();
 
@@ -337,16 +343,16 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 	    	}
 	    	restartFlag=true;
 	    	//リスタート待受け
-			System.out.println("④" + (gameOverLoop?"リスタート待受けを開始します":"リスタート待受けをスキップします"));
+//			System.out.println("④" + (gameOverLoop?"リスタート待受けを開始します":"リスタート待受けをスキップします"));
 	    	for(int i = 0;gameOverLoop; i++){
-	    		System.out.println("リスタート待受け:[" + i + "]");
+//	    		System.out.println("リスタート待受け:[" + i + "]");
 	    		try {
 	    			Thread.sleep(speed);
 	    		} catch (InterruptedException e) {
 	    			e.printStackTrace();
 	    		}
 	    	}
-			System.out.println("④リスタート待受けを終了します");
+//			System.out.println("④リスタート待受けを終了します");
 		}
 
     }
@@ -578,7 +584,7 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
             speed = SPEED_HIGH;
         }
         if(keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-    		System.out.println("Enterキー restartFlag:[" + restartFlag + "]");
+//    		System.out.println("Enterキー restartFlag:[" + restartFlag + "]");
             if (restartFlag) {
             	gameOverLoop=false;
             }else{
@@ -873,6 +879,7 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
      * 				y軸
      * */
     public void writeBlock(Graphics g,int number,int x,int y){
+    	System.out.print("writeBlock  number:[" + number + "]");
     	switch(number){
     	case 0:
         	blockShape(g,x,y+BLOCK,x,y,x,y-BLOCK,x,y-BLOCK*2,Color.orange);
@@ -902,6 +909,10 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
         	blockShape(g,x+BLOCK,y,x,y,x-BLOCK,y,x+BLOCK,y-BLOCK,Color.magenta);
     		break;
     	case 10:
+    		//□□□□□□□
+    		//□□□■□□□
+    		//□□■■■□□
+    		//□□□□□□□
         	blockShape(g,x+BLOCK,y,x,y,x-BLOCK,y,x,y-BLOCK,Color.pink);
     		break;
     	case 11:
@@ -1215,7 +1226,7 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
     		}
     		br.close();
     	}catch(IOException e){
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
     	arrSort();
     }
@@ -1298,7 +1309,7 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 			}
 			bw.close();
 		} catch (IOException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
     }
     public void arrSort(){
