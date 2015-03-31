@@ -1,4 +1,4 @@
-//転載元　http://www.wacharo.net/Tetris/
+//参照元　http://www.wacharo.net/Tetris/
 package pkg5;
 
 import java.applet.Applet;
@@ -16,7 +16,7 @@ public class Tetris5 extends Applet implements Runnable, KeyListener {
     private int block=10;
     private int width=100,height=200;
     private int margin=10;
-    private int xx,yy;
+    private int xx=startXX,yy=startYY;
     private int pattern,turn;
     private int ran=0;
 
@@ -64,7 +64,7 @@ public class Tetris5 extends Applet implements Runnable, KeyListener {
         offG.setColor(Color.gray);
         offG.fillRect(0,0,width,height);
 
-        Block.polygon(xx,yy,block,offG,pattern,ran);
+        Block.polygon(xx,yy,block,offG,pattern,ran,Status,colorStatus);
 
         for(int i=0;i<x;i++) {
             for(int j=0;j<y;j++) {
@@ -85,6 +85,7 @@ public class Tetris5 extends Applet implements Runnable, KeyListener {
     }
 
     public void run() {
+//    	if(th == Thread.currentThread())repaint();
         while(th == Thread.currentThread()) {
             try {
                 Thread.sleep(SPEED);
@@ -94,7 +95,7 @@ public class Tetris5 extends Applet implements Runnable, KeyListener {
             repaint();
             yy += block;
 
-            if(Seigyo.downCheck(xx,yy,block,Status,colorStatus,pattern,ran)) {
+            if(Seigyo.downCheck(xx,yy,block,Status,colorStatus,pattern,ran,true)) {
                 yy=startYY;
             }
         }

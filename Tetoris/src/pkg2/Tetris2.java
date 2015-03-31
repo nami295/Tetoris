@@ -1,4 +1,4 @@
-//転載元　http://www.wacharo.net/Tetris/
+//参照元　http://www.wacharo.net/Tetris/
 package pkg2;
 import java.applet.Applet;
 import java.awt.Color;

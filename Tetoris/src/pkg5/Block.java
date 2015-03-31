@@ -1,14 +1,23 @@
-//転載元　http://www.wacharo.net/Tetris/
+//参照元　http://www.wacharo.net/Tetris/
 package pkg5;
 
 import java.awt.Graphics;
 
 public class Block {
-    public static void polygon(int xx,int yy,int block,Graphics offG,int pattern,int ran) {
+    public static void polygon(int xx,int yy,int block,Graphics offG,int pattern,int ran,boolean[][] Status,int[][] colorStatus) {
+    	int shadowYY = yy;
+        for(;Seigyo.downCheck(xx, shadowYY, block, Status, colorStatus, pattern, ran,false) == false;shadowYY += block){
+
+        }
+    	_polygon(xx, shadowYY, block, offG, pattern, ran,true);
+    	_polygon(xx, yy, block, offG, pattern, ran,false);
+    }
+    private static void _polygon(int xx,int yy,int block,Graphics offG,int pattern,int ran,boolean shadow) {
         switch(ran) {
             case 0:
                 if(pattern==0) {
-                    offG.setColor(Clr.clr[ran]);
+                    if(shadow)offG.setColor(Clr.shadow);
+                    else offG.setColor(Clr.clr[ran]);
                     offG.fillRect(xx,yy+block,block,block);
                     offG.fillRect(xx,yy,block,block);
                     offG.fillRect(xx,yy-block,block,block);
@@ -22,7 +31,8 @@ public class Block {
                 }
 
                 if(pattern==1) {
-                    offG.setColor(Clr.clr[ran]);
+                    if(shadow)offG.setColor(Clr.shadow);
+                    else offG.setColor(Clr.clr[ran]);
                     offG.fillRect(xx-block,yy,block,block);
                     offG.fillRect(xx,yy,block,block);
                     offG.fillRect(xx+block,yy,block,block);
@@ -36,7 +46,8 @@ public class Block {
                 }
 
                 if(pattern==2) {
-                    offG.setColor(Clr.clr[ran]);
+                    if(shadow)offG.setColor(Clr.shadow);
+                    else offG.setColor(Clr.clr[ran]);
                     offG.fillRect(xx,yy-block,block,block);
                     offG.fillRect(xx,yy,block,block);
                     offG.fillRect(xx,yy+block,block,block);
@@ -50,7 +61,8 @@ public class Block {
                 }
 
                 if(pattern==3) {
-                    offG.setColor(Clr.clr[ran]);
+                    if(shadow)offG.setColor(Clr.shadow);
+                    else offG.setColor(Clr.clr[ran]);
                     offG.fillRect(xx+block,yy,block,block);
                     offG.fillRect(xx,yy,block,block);
                     offG.fillRect(xx-block,yy,block,block);
