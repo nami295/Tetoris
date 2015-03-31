@@ -93,13 +93,20 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 	private final String KEY_GAME_OVER_UNDER = "game_over_under";
 	private final Map<String,ScreenString> SCREENSTRING = new HashMap<String,ScreenString>(){
 		{
-			put(KEY_TITLE,new ScreenString("TETRIS",Color.white,new Font(null,Font.BOLD,40),width/2/2,BLOCK*4));
-			put(KEY_TITLE_UNDER,new ScreenString("Pless Enter",Color.white,new Font(null,Font.PLAIN,20),width/2/2+BLOCK/2,height/2+(BLOCK*6)));
-			put(KEY_SCORE_LABEL,new ScreenString("score.",new Color(255,250-19*10,255-19*10),new Font(null,Font.PLAIN,20),width+20,40));
-			put(KEY_SCORE,new ScreenString(null,new Color(255,250-19*10,255-19*10),new Font(null,Font.PLAIN,20),width+80,40));
-			put(KEY_LEVEL,new ScreenString("Lv.",new Color(255,250-19*10,255-19*10),new Font(null,Font.PLAIN,20),width+20,80));
-			put(KEY_GAME_OVER,new ScreenString("Game Over",new Color(255,250-19*10,255-19*10),new Font(null,Font.ITALIC,40),width/2/2/2,100));
-			put(KEY_GAME_OVER_UNDER,new ScreenString("pless Enter one more Challenge!!",new Color(255,250-19*10,255-19*10),new Font(null,Font.ITALIC,20),2,150));
+			put(KEY_TITLE,
+					new ScreenString("TETRIS",Color.white,new Font(null,Font.BOLD,40),width/2/2,BLOCK*4));
+			put(KEY_TITLE_UNDER,
+					new ScreenString("Pless Enter",Color.white,new Font(null,Font.PLAIN,20),width/2/2+BLOCK/2,height/2+(BLOCK*6)));
+			put(KEY_SCORE_LABEL,
+					new ScreenString("score.",new Color(255,250-19*10,255-19*10),new Font(null,Font.PLAIN,20),width+20,40));
+			put(KEY_SCORE,
+					new ScreenString(null,new Color(255,250-19*10,255-19*10),new Font(null,Font.PLAIN,20),width+80,40));
+			put(KEY_LEVEL,
+					new ScreenString("Lv.",new Color(255,250-19*10,255-19*10),new Font(null,Font.PLAIN,20),width+20,80));
+			put(KEY_GAME_OVER,
+					new ScreenString("Game Over",new Color(255,250-19*10,255-19*10),new Font(null,Font.ITALIC,40),width/2/2/2,100));
+			put(KEY_GAME_OVER_UNDER,
+					new ScreenString("pless Enter one more Challenge!!",new Color(255,250-19*10,255-19*10),new Font(null,Font.ITALIC,20),2,150));
 		}
 	};
     @Override
@@ -283,7 +290,6 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
     public void run() {
 		while (game) {
 			syokika();
-//			System.out.println("①マスの初期化を行います");
 	    	//マスの初期化
 	    	for(int i=0;i<subWidth;i++){
 	    		for(int j=0;j<subHeight;j++){
@@ -299,9 +305,7 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 	    			}
 	    		}
 	    	}
-//			System.out.println("①マスの初期化が終了しました");
 
-//			System.out.println("②" + (opLoopJudge?"トップ画面のループに入ります":"トップ画面のループをスキップします"));
 			while (opLoopJudge) {	//opループ
 		    	try {
 		    		Thread.sleep(speed);
@@ -311,8 +315,6 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 		    	repaint();
 				plessEnter += 1;
 			}
-//			System.out.println("②トップ画面のループが終了しました");
-//			System.out.println("③" + (loopJudge?"テトリスのループに入ります":"テトリスのループをスキップします"));
 			//テトリスループ処理
 			while (loopJudge) {
 		    	try {
@@ -329,7 +331,6 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 				y += BLOCK;
 				gameOver();
 			}
-//			System.out.println("③テトリスのループが終了しました");
 			//ゲームオーバー画面描画
 			repaint();
 
@@ -343,16 +344,13 @@ public class Tetoris extends Applet implements Runnable, KeyListener{
 	    	}
 	    	restartFlag=true;
 	    	//リスタート待受け
-//			System.out.println("④" + (gameOverLoop?"リスタート待受けを開始します":"リスタート待受けをスキップします"));
 	    	for(int i = 0;gameOverLoop; i++){
-//	    		System.out.println("リスタート待受け:[" + i + "]");
 	    		try {
 	    			Thread.sleep(speed);
 	    		} catch (InterruptedException e) {
 	    			e.printStackTrace();
 	    		}
 	    	}
-//			System.out.println("④リスタート待受けを終了します");
 		}
 
     }
